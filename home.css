@@ -3,6 +3,7 @@ body { 	margin:0;
 	scrollbar-face-color:	#cc66cc;
 	scrollbar-arrow-color:	#006600;
 	scrollbar-track-color:	#cccccc;
+	padding:		20px 20px 20px 20px;
 	}
 
 .navBar {	list-style-type: none;
