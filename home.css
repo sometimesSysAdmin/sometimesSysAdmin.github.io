@@ -1,9 +1,18 @@
-body { 	margin:0;
-	background-color: #ffffff;
-	scrollbar-face-color:	#cc66cc;
-	scrollbar-arrow-color:	#006600;
-	scrollbar-track-color:	#cccccc;
-	padding:		20px 20px 20px 20px;
+#heading {	margin:0;
+		background-color: #777777;
+		font-size: large;
+		font-style: bold;
+		border-width: 2px;
+		border-color: #ff0000;
+		text-align: center;
+	}
+
+body 	{ 	margin:0;
+		background-color: #ffffff;
+		scrollbar-face-color:	#cc66cc;
+		scrollbar-arrow-color:	#006600;
+		scrollbar-track-color:	#cccccc;
+		padding:		20px 20px 20px 20px;
 	}
 
 .navBar {	list-style-type: none;
