@@ -1,0 +1,12 @@
+body { 	margin:0;
+	background-color: #ffffff;
+	scrollbar-face-color:	#cc66cc;
+	scrollbar-arrow-color:	#006600;
+	scrollbar-track-color:	#cccccc;
+	}
+
+.navBar {	list-style-type: none;
+		border-bottom:	 2px solid #000000;
+		border-top:	 2px solid #000000;
+		padding:	 20px 20px 20px 20px;
+	}
