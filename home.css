@@ -7,11 +7,12 @@ body 	{ 	margin:0;
 	}
 
 heading {	margin:0;
-		background-color: #777777;
+		background-color: grey;
 		font-size: 	  x-large;
 		font-style:	  bold;
+		color:		  red;
 		border-width: 	  2px;
-		border-color: 	  #ff0000;
+		outline-color: 	  red;
 		text-align:	  center;
 	}
 
