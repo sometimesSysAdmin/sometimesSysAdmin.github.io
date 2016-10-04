@@ -10,10 +10,13 @@ h1 	{	margin:			0;
 		background-color: 	#999999;
 		font-size: 	  	xx-large;
 		font-style:	  	bold;
-		color:		  	red;
-		border-width: 	  	2px;
 		outline-color: 	  	red;
 		text-align:	  	center;
+		border-top:		2px solid red;
+		border-bottom:		2px solid red;
+		border-right:		2px solid red;
+		border-left:		2px solid red;
+		color:		  	red;
 		padding:	  	30px 30px 30px 30px;
 	}
 
@@ -24,7 +27,6 @@ footer	{	text-size:		x-small;
 
 .navBar {	list-style-type: 	none;
 		border-bottom:	 	2px solid #000000;
-		border-top:	 	2px solid #000000;
 		padding:	 	20px 20px 20px 20px;
 	}
 .navBar a:link {	color:		red;
