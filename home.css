@@ -12,10 +12,10 @@ h1 	{	margin:			0;
 		font-style:	  	bold;
 		outline-color: 	  	red;
 		text-align:	  	center;
-		border-top:		2px solid red;
-		border-bottom:		2px solid red;
-		border-right:		2px solid red;
-		border-left:		2px solid red;
+		border-top:		2px solid black;
+		border-bottom:		2px solid black;
+		border-right:		2px solid black;
+		border-left:		2px solid black;
 		color:		  	red;
 		padding:	  	30px 30px 30px 30px;
 	}
