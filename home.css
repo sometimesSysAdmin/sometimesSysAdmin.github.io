@@ -1,24 +1,29 @@
-body 	{ 	margin:0;
-		background-color: #ffffff;
+body 	{ 	margin:			0;
+		background-color: 	#ffffff;
 		scrollbar-face-color:	#cc66cc;
 		scrollbar-arrow-color:	#006600;
 		scrollbar-track-color:	#cccccc;
 		padding:		20px 20px 20px 20px;
 	}
 
-h1 {	margin:0;
-		background-color: #999999;
-		font-size: 	  xx-large;
-		font-style:	  bold;
-		color:		  red;
-		border-width: 	  2px;
-		outline-color: 	  red;
-		text-align:	  center;
-		padding:	  30px 30px 30px 30px;
+h1 	{	margin:			0;
+		background-color: 	#999999;
+		font-size: 	  	xx-large;
+		font-style:	  	bold;
+		color:		  	red;
+		border-width: 	  	2px;
+		outline-color: 	  	red;
+		text-align:	  	center;
+		padding:	  	30px 30px 30px 30px;
 	}
 
-.navBar {	list-style-type: none;
-		border-bottom:	 2px solid #000000;
-		border-top:	 2px solid #000000;
-		padding:	 20px 20px 20px 20px;
+footer	{	text-size:		small;
+		text-align:		right;
+		font-family:		"Courier New", Courier, monospace;
+	}
+
+.navBar {	list-style-type: 	none;
+		border-bottom:	 	2px solid #000000;
+		border-top:	 	2px solid #000000;
+		padding:	 	20px 20px 20px 20px;
 	}
