@@ -40,3 +40,13 @@ footer	{	text-size:		x-small;
 			border:		2px outset #000000;}
 .navBar a:active {	color:		#000000;
 			border:		2px outset #000000;}
+
+.progNav {	list-style-type:	circle;
+	}
+.progNav a:link {	color:		black;
+			background-color:	#999999;
+			font-style:		italic;}
+.progNav a:hover {	color:		#999999;
+			background-color:	red;
+			font-style:		italic;
+			border:		2px outset #000000;}
