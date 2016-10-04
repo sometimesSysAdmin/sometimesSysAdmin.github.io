@@ -29,7 +29,7 @@ footer	{	text-size:		x-small;
 		border-bottom:	 	2px solid #000000;
 		padding:	 	20px 20px 20px 20px;
 	}
-.navBar a:link {	color:		red;
+.navBar a:link {	color:		black;
 			background-color:	#999999;}
 .navBar a:visited {	color:		blue;
 			background-color:	#999999;}
