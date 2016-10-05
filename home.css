@@ -46,7 +46,13 @@ footer	{	text-size:		x-small;
 			vertical-align:	middle;
 			padding:	15px;}
 
-.progNav tr:nth-child(even) {	text-align:	left;}
+.progNav th {		background-color:	black;
+			color:			white;
+			text-align:		center;}
+
+.progNav td {		text-align:	center;}
+
+.progNav td + td {	text-align:	left;}
 
 .progNav a:link {	color:		black;
 			background-color:	#BBBBBB;

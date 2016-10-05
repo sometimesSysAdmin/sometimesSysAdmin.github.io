@@ -1,3 +1,27 @@
+/*	Jamie Harvey
+	harvey.jamie.j@gmail.com
+	sometimesSysAdmin.github.io
+
+	Input:	User enters a choice for menu option. If adding an element
+		user inputs the element's information (string)
+	Output: List displayed at start of each iteration. Menu options and
+		various prompts according to menu selection.
+	Description:
+		This program creates a circular list.  The beginning of the list is
+		identified by int* current.  At each iteration the program will
+		display the list and then menu.  The user can:
+		1: Add an element - will prompt for new elements info (string) and assigns
+			a unique ID (integer).
+		2: Remove element - will prompt for ID (integer) of element to remove.
+		3: Shift right - The new start of the list will be the element that
+			directly follows the original starting element.
+		4: Shift right - The new start of the list will be the element that
+			preceeded that original starting element (the original end).
+		5: Exit the program.
+
+*/
+
+
 #include "list.h"
 #include <iostream>
 
