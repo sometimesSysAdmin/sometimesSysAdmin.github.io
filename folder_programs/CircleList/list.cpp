@@ -1,3 +1,9 @@
+/*	Jamie Harvey
+	harvey.jamie.j@gmail.com
+	sometimesSysAdmin.github.io
+
+*/
+
 #include "list.h"
 #include <iostream>
 #include <iomanip>

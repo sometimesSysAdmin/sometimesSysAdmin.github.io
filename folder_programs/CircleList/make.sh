@@ -1,13 +1,13 @@
 #!/bin/bash
-echo -e "Please enter file name to link with main"
-read file
-if [ -e $file.cpp ]; then
+if [ -e list.cpp && -e list.h && -e main.cpp ]; then
     clear
-    g++ -Wall -Wextra main.cpp $file.cpp -o $file.o 2> error.txt
-    if [ -e $file.o ]; then
-	./$file.o
+    g++ main.cpp list.cpp -o circleList.o 2> error.txt
+    if [ -e circleList.o ]; then
+	.circlelist.o
+    else
+    	echo "Program did not compile correctly. Please read error.txt."
     fi
 else
-    echo "File does not exist"
+    echo "One or more files do not exist"
 fi
     

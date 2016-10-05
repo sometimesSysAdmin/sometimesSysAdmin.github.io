@@ -1,5 +1,14 @@
+/*	Jamie Harvey
+	harvey.jamie.j@gmail.com
+	sometimesSysAdmin.github.io
+
+*/
+
 #include <iostream>
 #include <string>
+
+#ifndef LIST_H
+#define LIST_H
 
 using namespace std;
 
@@ -32,3 +41,5 @@ class CList {
   CElem *current;
   int count;
 };
+
+#endif
