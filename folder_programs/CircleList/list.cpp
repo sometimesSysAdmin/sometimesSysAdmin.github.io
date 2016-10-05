@@ -10,7 +10,7 @@
 
 using namespace std;
 
-void CList::disp() {
+void CList::disp() const {
   cout << left << setw(5) << "ID" << setw(10) << "ADDRESS" << setw(20)
        << "INFO" << endl;
   for (int i = 0; i < count; i++) {

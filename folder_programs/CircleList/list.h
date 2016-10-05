@@ -21,7 +21,7 @@ struct CElem {
 
 class CList {
  public:
-  void disp();
+  void disp() const;
   //Displays the list starting with what *current is pointing to
   void shiftRight();
   //Shifts *current to the right
