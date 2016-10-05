@@ -44,9 +44,9 @@ footer	{	text-size:		x-small;
 .progNav {	list-style-type:	circle;
 	}
 .progNav a:link {	color:		black;
-			background-color:	#999999;
+			background-color:	#BBBBBB;
 			font-style:		italic;}
-.progNav a:hover {	color:		#999999;
+.progNav a:hover {	color:		#BBBBBB;
 			background-color:	red;
 			font-style:		italic;
 			border:		2px outset #000000;}
