@@ -1,9 +1,4 @@
 #!/bin/bash
-
-# Jamie Harvey
-# harvey.jamie.j@gmail.com
-# sometimesSysAdmin.github.io
-
 # Script to add directories for users.
 
 #List all users on system
