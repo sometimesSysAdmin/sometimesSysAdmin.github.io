@@ -23,13 +23,15 @@ footer	{	text-size:		x-small;
 		font-family:		"Courier New", Courier, monospace;}
 
 .navBar {	list-style-type: 	none;
+		font-style:		bold;
 		border-bottom:	 	2px solid #000000;
 		padding:	 	20px 20px 20px 20px;}
 
 .navBar a:link {	color:		black;
 			background-color:	#999999;}
 
-.navBar a:visited {	background-color:	#999999;}
+.navBar a:visited {	background-color:	#999999;
+			color:		black;}
 
 .navBar a:focus {	color:		red;
 			background-color:	#999999;}
