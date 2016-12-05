@@ -5,8 +5,11 @@
     <title>Create a virtual lab</title>
   </head>
   <body>
-    <div align="center"><u><b>Create a virtual lab<br>
-        </b></u>
+    <div align="center">
+      <h1></h1>
+      <h1><u>Create a Virtual Network</u></h1>
+      <h3>Part 1 : Setting up your pfSense router<br>
+      </h3>
       <div align="left"><br>
         I like to keep a small virtual lab on my laptop so I can play
         around with it when time permits. For this tutorial you will
@@ -19,8 +22,17 @@
           </li>
           <li><a
 href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Metasploitable</a></li>
-          <li><a href="https://www.kali.org/downloads/">Kali Linux ova<br>
-            </a></li>
+          <li><a href="https://www.kali.org/downloads/">Kali Linux ova</a></li>
+        </ul>
+        <p>Part 1 will be covering setting up pfSense to use as a router
+          for your internal network.<br>
+          <a href="virtualNetwork.html">Part 2</a> will cover installing
+          Kali and Metasploitable<br>
+          Part 3 will cover provisioning a PXE Boot Server<br>
+          Part 4 will cover setting up Snort and Wireshark to look at
+          your new network<br>
+        </p>
+        <ul>
         </ul>
         Start by installing VirtualBox if you don't have it
         already.&nbsp; Click "New" to provision a new VM.&nbsp; Name it
@@ -86,46 +98,49 @@ href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Me
               width="100%">
               <tbody>
                 <tr>
-                  <td valign="top">LAN IPv4 address<br>
+                  <td valign="top" width="50%">LAN IPv4 address<br>
                   </td>
-                  <td valign="top">192.168.2.1<br>
-                  </td>
-                </tr>
-                <tr>
-                  <td valign="top">LAN IPv4 subnet bit count<br>
-                  </td>
-                  <td valign="top">24<br>
+                  <td valign="top" width="50%">192.168.2.1<br>
                   </td>
                 </tr>
                 <tr>
-                  <td valign="top">LAN IPv4 upstream gateway address<br>
+                  <td valign="top" width="50%">LAN IPv4 subnet bit count<br>
                   </td>
-                  <td valign="top">None<br>
-                  </td>
-                </tr>
-                <tr>
-                  <td valign="top">LAN IPV6 address<br>
-                  </td>
-                  <td valign="top">None<br>
+                  <td valign="top" width="50%">24<br>
                   </td>
                 </tr>
                 <tr>
-                  <td valign="top">Enable DHCP server on LAN?<br>
+                  <td valign="top" width="50%">LAN IPv4 upstream gateway
+                    address<br>
                   </td>
-                  <td valign="top">y<br>
-                  </td>
-                </tr>
-                <tr>
-                  <td valign="top">IPv4 client address range<br>
-                  </td>
-                  <td valign="top">192.168.2.2 - 192.168.2.254<br>
+                  <td valign="top" width="50%">None<br>
                   </td>
                 </tr>
                 <tr>
-                  <td valign="top">Revert to HTTP as webConfigurator
-                    protocol?<br>
+                  <td valign="top" width="50%">LAN IPV6 address<br>
                   </td>
-                  <td valign="top">y<br>
+                  <td valign="top" width="50%">None<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="50%">Enable DHCP server on
+                    LAN?<br>
+                  </td>
+                  <td valign="top" width="50%">y<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="50%">IPv4 client address range<br>
+                  </td>
+                  <td valign="top" width="50%">192.168.2.31 -
+                    192.168.2.254<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="50%">Revert to HTTP as
+                    webConfigurator protocol?<br>
+                  </td>
+                  <td valign="top" width="50%">y<br>
                   </td>
                 </tr>
               </tbody>
@@ -152,34 +167,34 @@ href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Me
         <table border="1" cellpadding="2" cellspacing="2" width="100%">
           <tbody>
             <tr>
-              <td valign="top">Hostname<br>
+              <td valign="top" width="50%">Hostname<br>
               </td>
-              <td valign="top">fw1<br>
-              </td>
-            </tr>
-            <tr>
-              <td valign="top">Domain<br>
-              </td>
-              <td valign="top">harvey.virtnet<br>
+              <td valign="top" width="50%">fw1<br>
               </td>
             </tr>
             <tr>
-              <td valign="top">Primary DNS Server<br>
+              <td valign="top" width="50%">Domain<br>
               </td>
-              <td valign="top">192.168.1.1 (The gateway for the bridged
-                WAN)<br>
-              </td>
-            </tr>
-            <tr>
-              <td valign="top">Secondary DNS Server<br>
-              </td>
-              <td valign="top">8.8.8.8<br>
+              <td valign="top" width="50%">harvey.virtnet<br>
               </td>
             </tr>
             <tr>
-              <td valign="top">Override DNS<br>
+              <td valign="top" width="50%">Primary DNS Server<br>
               </td>
-              <td valign="top">No<br>
+              <td valign="top" width="50%">192.168.2.1 (The pfSense box)<br>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" width="50%">Secondary DNS Server<br>
+              </td>
+              <td valign="top" width="50%">192.168.1.1 (The gateway for
+                the bridged WAN)<br>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" width="50%">Override DNS<br>
+              </td>
+              <td valign="top" width="50%">No<br>
               </td>
             </tr>
           </tbody>
@@ -196,15 +211,13 @@ href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Me
         nothing.&nbsp; So what is the next step?&nbsp; DNS.&nbsp; It's
         almost always DNS.&nbsp; To confirm you can ping 8.8.8.8, but
         not google.com.&nbsp; Go to Services -&gt; DNS Resolver and
-        select Enable Forwarding Mode.&nbsp; Save and Apply the
-        Configuration.&nbsp; Now reload that other tab to test.<br>
+        unselect Enable DNS Resolver.&nbsp; Then go to Services -&gt;
+        DNS Forwarder.&nbsp; You can check by running an nslookup on
+        fw1.<br>
         <br>
-        Now import the Kali Linux distribution and set it to the
-        internal network.&nbsp; Username is <b>root</b> and the
-        password is <b>toor</b>. <br>
+        This is the end of part 1.&nbsp; Next part we will be getting
+        Kali and Metasploitable set up on your virtual network.<br>
         <br>
-        In part 2 we'll set up a DNS server and set up a few servers for
-        Kali to start playing with...<br>
       </div>
     </div>
   </body>
