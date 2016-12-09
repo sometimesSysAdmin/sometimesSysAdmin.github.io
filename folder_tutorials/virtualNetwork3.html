@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Create a Virtual Network pt 3</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <h1> "The Sometimes SysAdmin Blog" </h1>
+    <!-- Navigation Bar --> <span style="text-align: center;">
+      <div class="navBar"> | <a href="/index.html"> Home</a> | <a
+          href="/about.html"> About me</a> | <a href="/programs.html">
+          Programs</a> | <a href="/tutorials.html"> Tutorials</a> | <a
+          href="/blog.html"> Blog Posts</a> | </div>
+    </span> <br>
+    <div align="center">
+      <h1><u>Create a Virtual Network</u></h1>
+      <h3>Part 3 : Setting up a PXE Boot Server<br>
+      </h3>
+      <p align="left">I like to keep a small virtual lab on my laptop so
+        I can play around with it when time permits. For this tutorial
+        you will need:<br>
+      </p>
+      <div align="left">
+        <ul>
+          <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a></li>
+          <li><a href="https://pfsense.org/download/">pfSense iso</a></li>
+          <li><a href="https://wiki.centos.org/Download">CentOS 7
+              Everything iso</a><br>
+          </li>
+          <li><a
+href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Metasploitable</a></li>
+          <li><a href="https://www.kali.org/downloads/">Kali Linux ova</a></li>
+        </ul>
+        <a
+href="file:///C:/Users/harve/Documents/GitHub/sometimesSysAdmin.github.io/folder_tutorials/virtualNetwork.html">Part
+
+
+
+
+
+
+
+
+
+
+
+
+          1</a> will be covering setting up pfSense to use as a router
+        for your internal network.<br>
+        <a href="virtualNetwork2.html">Part 2</a> will cover installing
+        Kali and Metasploitable<br>
+        Part 3 will cover provisioning a PXE Boot Server<br>
+        Part 4 will cover setting up Snort and Wireshark to look at your
+        new network<br>
+        <br>
+        Start a new VM named <b>CentOS 7 PXE Boot Server</b> or
+        whatever your naming scheme dictates.&nbsp; Install CentOS 7
+        minimal as the operating system.&nbsp; Give it 1 GB of RAM (for
+        now, we can play with it later to see how little RAM we need)
+        and a 15 GB VHD (or larger if you want more OS's).&nbsp; <br>
+        <br>
+        After everything is installed set a DHCP reservation for it in
+        pfSense (like you've been doing with the rest).&nbsp; Now we
+        need to disable the firewall<br>
+        <code>	systemctl disable firewalld<br>	systemctl stop firewalld<br></code>Then to disable SELinux<br><code>	sudo vi /etc/sysconfig/selinux<br></code>Then change line 7 to<br><code>	SELINUX=permissive<br></code>And finally install the needed packages<br><code>	sudo yum install syslinux tftp-server xinetd vsftpd wget -y<br></code>When it's finished installing open the tftp configuration file<br><code>	vi /etc/xinetd.d/tftp<br></code>And change line 14 from yes to no and make sure line 13 server-args is <b>-s /tftpboot</b>. &nbsp; Enable and restart xinetd, vsftpd, and tftp with systemctl<br>Now you need to copy the bootloader files from syslinux's directory to your tftpboot directory<br><code>	cd /usr/share/syslinux<br>	sudo cp chain.c32 mboot.c32 memdisk menu.c32 pxelinux.0 /tftpboot/<br></code>Make the menu.c32 permissions 755<br>Now to download a CentOS 7 iso<br><code>	mkdir ~/Downloads<br>	cd ~/Downloads<br>	wget http://[Find mirror for a CentOS iso]<br></code>Now to mount the iso and get the needed files.&nbsp; You can also save the .iso in Downloads and edit fstab to mount to /var/ftp/pub/centos7<br><code>	sudo mount -o loop CentOS-7[tab] /mnt<br>	sudo mkdir /var/ftp/pub/centos7<br>	sudo cp -fr /mnt/* /var/ftp/pub/centos7<br>	sudo chmod -R 755 /var/ftp/pub/centos7<br>	sudo mkdir -p /tftpboot/netboot<br>	sudo cp /var/ftp/pub/centos7/images/pxeboot/vmlinuz /tftpboot/netboot/</code><br><code>	sudo cp /var/ftp/pub/centos7/images/pxeboot/initrd.img /tftpboot/netboot/<br></code>Now to edit <b>/tftpboot/netboot/pxelinux.cfg/default</b><br><code>	default menu.c32<br>	prompt 0<br>	timeout 300<br>	ONTIMEOUT local<br>	menu title ### PXE Boot for harvey.virtnet ###<br>	label menu<br>	MENU LABEL Install CentOS 7<br>	KERNEL netboot/vmlinuz<br>	APPEND initrd=netboot/initrd.img inst.repo=ftp://pxe.harvey.virtnet/pub/centos7<br></code>Now to set it up with out DHCP on our pfSense box.&nbsp; In a web browser at http://fw1 sign in and go to Services -&gt; DHCP Server.&nbsp; Towards the bottom click on TFTP Server and add the hostname (pxe).&nbsp; Next click on Network Boot and click the checkbox to enable it and enter the ip address of the pxe server&nbsp; Default BIOS is pxelinux.0 and Root path is ftp://<b>ip address</b>/pub.&nbsp; Finally to enable the services on the pxe server and test it out.<br><div align="center"><img alt="" src="virtualLabImages/014.JPG" height="398" width="723"><br></div></div></div></body></html>
