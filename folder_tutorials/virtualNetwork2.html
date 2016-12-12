@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Create a Virtual Network pt 2</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <h1> "The Sometimes SysAdmin Blog" </h1>
+    <!-- Navigation Bar --> <span style="text-align: center;">
+      <div class="navBar"> | <a href="/index.html"> Home</a> | <a
+          href="/about.html"> About me</a> | <a href="/programs.html">
+          Programs</a> | <a href="/tutorials.html"> Tutorials</a> | <a
+          href="/blog.html"> Blog Posts</a> | </div>
+    </span> <br>
+    <div align="center">
+      <h1><u>Create a Virtual Network</u></h1>
+      <h3>Part 2 : Setting up Kali and Metasploitable on your network</h3>
+      <p align="left">I like to keep a small virtual lab on my laptop so
+        I can play around with it when time permits. For this tutorial
+        you will need:<br>
+      </p>
+      <div align="left">
+        <ul>
+          <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a></li>
+          <li><a href="https://pfsense.org/download/">pfSense iso</a></li>
+          <li><a href="https://wiki.centos.org/Download">CentOS 7
+              Everything iso</a><br>
+          </li>
+          <li><a
+href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Metasploitable</a></li>
+          <li><a href="https://www.kali.org/downloads/">Kali Linux ova</a></li>
+        </ul>
+        <a
+href="file:///C:/Users/harve/Documents/GitHub/sometimesSysAdmin.github.io/folder_tutorials/virtualNetwork.html">Part
+
+
+
+
+
+          1</a> will be covering setting up pfSense to use as a router
+        for your internal network.<br>
+        Part 2 will cover installing Kali and Metasploitable<br>
+        <a href="virtualNetwork3.html">Part 3</a> will cover
+        provisioning a PXE Boot Server<br>
+        Part 4 will cover setting up Snort and Wireshark to look at your
+        new network<br>
+        <br>
+        So you have learned how to create VM's.&nbsp; When you browse to
+        the Metasploitable and Kali download pages, you'll notice an
+        option to download VM's.&nbsp; For instance browse to the Kali
+        Linux link provided and scroll halfway down the page.&nbsp; You
+        will see an option to download Kali Virtual Images.&nbsp; Click
+        this and it will take you to a page with VM's.&nbsp; Scroll down
+        to the VirtualBox Images (note that they provide them for a few
+        virtualization platforms).&nbsp; Download the Kali Linux 64 Bit
+        VBox in open virtualization format .ova or click <a
+href="https://images.offensive-security.com/virtual-images/Kali-Linux-2016.2-vbox-amd64.ova">here</a>.<br>
+        <br>
+        Now that this is downloaded put it in a folder to save it and go
+        to your VirtualBox Manager.&nbsp; Click File -&gt; Import
+        Appliance and browse to the Kali Linux .ova file.&nbsp; Click
+        Next and look at the default values it has.&nbsp; Note that
+        we'll need to change the Network Adapter to the internal
+        network.&nbsp; Click import and let it do it's thing.&nbsp; When
+        it's finished go to the settings and set the Network Adapter to
+        internal network.<br>
+        <br>
+        Next we'll be installing the Metasploitable machine.&nbsp; After
+        downloading and unzipping this you are left with a few files
+        including a virtual machine disk format .vmdk.&nbsp; To install
+        this on VirtualBox click new.&nbsp; Make a machine name
+        Metasploitable with Type Linux 2.6/3.x/4.x (64-Bit) and 1 GB of
+        RAM.&nbsp; For the Hard Disk select Use an existing virtual hard
+        disk file and browse to the .vmdk.&nbsp; Browse to settings and
+        get it on the internal network.<br>
+        <br>
+        Now finally, we're going to set up some DHCP leases in the
+        pfSense.&nbsp; Go back to the pfSense webConfiguration at
+        192.168.2.1.&nbsp; Go to Services -&gt; DHCP Server.&nbsp;
+        Scroll to the bottom for DHCP Static Mappings for this Interface
+        and click add.&nbsp; We'll start with Kali.&nbsp; Enter the
+        desired ip address (use any address in 192.168.2.0/27 that isn't
+        taken), the hostname (<b>kali</b>), and a short
+        description.&nbsp; Leave all other defaults and scroll to the
+        bottom and click save.&nbsp; Now repeat the process with
+        Metasploitable (hostname is <b>metasploitable</b>).&nbsp; Now
+        you can run nslookup on metasploitable.<b>your.domain</b>.<br>
+        <br>
+        In Part 3, we will provision a PXE Boot server to quickly create
+        CentOS VM's for new services.<br>
+      </div>
+    </div>
+  </body>
+</html>

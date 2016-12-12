@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Create a Virtual Network pt 4</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <h1> "The Sometimes SysAdmin Blog" </h1>
+    <!-- Navigation Bar --> <span style="text-align: center;">
+      <div class="navBar"> | <a href="/index.html"> Home</a> | <a
+          href="/about.html"> About me</a> | <a href="/programs.html">
+          Programs</a> | <a href="/tutorials.html"> Tutorials</a> | <a
+          href="/blog.html"> Blog Posts</a> | </div>
+    </span> <br>
+    <div align="center">
+      <h1><u>Create a Virtual Network</u></h1>
+      <h3>Part 4 : Configuring Snort and Bro<br>
+      </h3>
+      <p align="left">I like to keep a small virtual lab on my laptop so
+        I can play around with it when time permits. For this tutorial
+        you will need:<br>
+      </p>
+      <div align="left">
+        <ul>
+          <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a></li>
+          <li><a href="https://pfsense.org/download/">pfSense iso</a></li>
+          <li><a href="https://wiki.centos.org/Download">CentOS 7
+              Everything iso</a><br>
+          </li>
+          <li><a
+href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Metasploitable</a></li>
+          <li><a href="https://www.kali.org/downloads/">Kali Linux ova</a></li>
+        </ul>
+        <a
+href="file:///C:/Users/harve/Documents/GitHub/sometimesSysAdmin.github.io/folder_tutorials/virtualNetwork.html">Part
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          1</a> will be covering setting up pfSense to use as a router
+        for your internal network.<br>
+        <a href="virtualNetwork2.html">Part 2</a> will cover installing
+        Kali and Metasploitable<br>
+        <a href="virtualNetwork4.html">Part 3</a> will cover
+        provisioning a PXE Boot Server<br>
+        Part 4 will cover setting up Snort and Wireshark to look at your
+        new network<br>
+        <br>
+        Create a new VM and name it bro.&nbsp; In the Settings -&gt;
+        System -&gt; Boot Order, change it to boot in the order of hard
+        disk then network.&nbsp; Now using the PXE server we just made
+        (and maybe a kickstart file that might get left in Programs in
+        the future) install a new VM with CentOS 7 minimal.&nbsp; When
+        the terminal comes up go in as root<br>
+        <code>&nbsp;&nbsp;&nbsp; yum upgrade -y<br>
+          &nbsp;&nbsp;&nbsp; yum install wget -y<br>
+        </code>Then install the dependencies for Bro<br>
+        <code>&nbsp;&nbsp;&nbsp; yum install cmake make gcc gcc-c++ flex
+          bison libpcap-devel openssl-devel python-devel swig zlib-devel<br>
+          &nbsp;&nbsp;&nbsp; mkdir /home/Downloads<br>
+          &nbsp;&nbsp;&nbsp; cd /home/Downloads</code><br>
+        <code>&nbsp;&nbsp;&nbsp; wget
+          https://www.bro.org/downloads/bro-2.5.tar.gz<br>
+          &nbsp;&nbsp;&nbsp; tar -xf bro-2.5.tar.gz<br>
+          &nbsp;&nbsp;&nbsp; cd bro-2.5<br>
+          &nbsp;&nbsp;&nbsp; ./configure &amp;&amp; make &amp;&amp; make
+          install<br>
+          &nbsp;&nbsp;&nbsp; make install-aux<br>
+          &nbsp;&nbsp;&nbsp; export PATH=/usr/local/bro/bin:$PATH</code><br>
+        You can save some time by setting BROCTL=/usr/local/bro<br>
+        Navigate to $BROCTL/etc/node.cfg and set the right interface<br>
+        Navigate to $BROCTL/etc/networks.cfg and set your environment
+        (192.168.2.0/24)<br>
+        And in $BROCTL/etc/broctl.cfg change your email address and set
+        the log rotation interval.<br>
+        <code> &nbsp;&nbsp;&nbsp; broctl<br>
+        </code>This gets you into the BroControl shell.&nbsp; For your
+        first command use <br>
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <code>install<br>
+          &nbsp;&nbsp;&nbsp; start <br>
+        </code><br>
+      </div>
+    </div>
+  </body>
+</html>

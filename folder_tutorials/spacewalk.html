@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Create a Virtual Network pt 3</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <h1> "The Sometimes SysAdmin Blog" </h1>
+    <!-- Navigation Bar --> <span style="text-align: center;">
+      <div class="navBar"> | <a href="/index.html"> Home</a> | <a
+          href="/about.html"> About me</a> | <a href="/programs.html">
+          Programs</a> | <a href="/tutorials.html"> Tutorials</a> | <a
+          href="/blog.html"> Blog Posts</a> | </div>
+    </span> <br>
+    <div align="center">
+      <h1><u>Create a Virtual Network</u></h1>
+      <h3>Part 3 : Setting up PXE Boot with a CentOS 7 Spacewalk Server<br>
+      </h3>
+      <p align="left">I like to keep a small virtual lab on my laptop so
+        I can play around with it when time permits. For this tutorial
+        you will need:<br>
+      </p>
+      <div align="left">
+        <ul>
+          <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a></li>
+          <li><a href="https://pfsense.org/download/">pfSense iso</a></li>
+          <li><a href="https://wiki.centos.org/Download">CentOS 7
+              Everything iso</a><br>
+          </li>
+          <li><a
+href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Metasploitable</a></li>
+          <li><a href="https://www.kali.org/downloads/">Kali Linux ova</a></li>
+        </ul>
+        <a
+href="file:///C:/Users/harve/Documents/GitHub/sometimesSysAdmin.github.io/folder_tutorials/virtualNetwork.html">Part
+
+
+
+
+
+
+
+
+
+
+          1</a> will be covering setting up pfSense to use as a router
+        for your internal network.<br>
+        <a href="virtualNetwork2.html">Part 2</a> will cover installing
+        Kali and Metasploitable<br>
+        Part 3 will cover provisioning a PXE Boot Server<br>
+        Part 4 will cover setting up Snort and Wireshark to look at your
+        new network<br>
+        <br>
+        So I wanted to setup a Preboot Execution Environment Boot
+        Server, and with Spacewalk you can also inventory your system,
+        install and update software, kickstart, and more.&nbsp; The only
+        downside is that this will require a large amount of HDD
+        space.&nbsp; The recommended requirements are 5 GB for the base
+        OS install and 30 GB per channel as well as 12 GB for the
+        database.&nbsp; So we're going to make a new VM in VirtualBox
+        called Spacewalk and it'll be a Red Hat 64-Bit server.&nbsp;
+        Give it a 72 GB hard drive and 2 GB of memory.&nbsp; <br>
+        <br>
+        When it starts, log in and give the command <code><br>
+        </code><code>&nbsp;&nbsp;&nbsp; yum upgrade -y<br>
+        </code>Install the EPEL-Release repository and vim with<br>
+        <code>&nbsp;&nbsp;&nbsp; yum install epel-release vim<br>
+        </code>Open up a file using vim at
+        /etc/yum.repos.d/jpackage-generic.repo and enter the following<br>
+        <code>&nbsp;&nbsp;&nbsp; name=JPackage generic<br>
+          &nbsp;&nbsp;&nbsp;
+          #baseurl=http://mirrors.dotsrc.org/pub/jpackage/5.0/generic/free/
+          <br>
+          &nbsp;&nbsp;&nbsp;
+          mirrorlist=http://www.jpackage.org/mirrorlist.php?dist=generic&amp;type=free&amp;release=5.0
+&nbsp;&nbsp;&nbsp;
+          <br>
+          &nbsp;&nbsp;&nbsp; enabled=1
+          <br>
+          &nbsp;&nbsp;&nbsp; gpgcheck=1
+          <br>
+          &nbsp;&nbsp;&nbsp; gpgkey=http://www.jpackage.org/jpackage.asc<br>
+        </code>Now to download the spacewalk repo rpm<br>
+        <code>&nbsp;&nbsp;&nbsp; rpm -Uvh http://yum.spacewalkproject.org/2.3/RHEL/7/x86_64/spacewalk-repo-2.3-4.el7.noarch.rpm<br>
+        </code>Install a Postgresql database for Spacewalk, and then
+        Spacewalk itself with the following commands<br>
+        <code>&nbsp;&nbsp;&nbsp; yum install spacewalk-setup-postgresql<br>
+          &nbsp;&nbsp;&nbsp; yum install spacewalk-postgresql<br>
+          &nbsp;&nbsp;&nbsp; spacewalk-setup<br>
+        </code>Next you need to open up the firewall using these
+        commands<br>
+        <code>&nbsp;&nbsp;&nbsp; firewall-cmd --add-service=https
+          --permanent<br>
+          &nbsp;&nbsp;&nbsp; firewall-cmd --add-service=http --permanent<br>
+          &nbsp;&nbsp;&nbsp; firewall-cmd --reload<br>
+        </code>You might also need to add the FQDN to the /etc/hosts
+        file if your hostname can't be resolved<br>
+        <code>&nbsp;&nbsp;&nbsp; 192.168.2.7 spacewalk.harvey.virtnet
+          spacewalk<br>
+          <br>
+        </code>Now in a different VM (that CentOS 7 with the browser
+        that we set up earlier) browse to <b>http://spacewalk/</b><br>
+        Enter your desired administrator credentials and set up an
+        account<br>
+        <div align="center"><img alt="" src="virtualLabImages/011.JPG" height="368" width="822"><br>
+          <div align="left">Now we'll create a Base Channel.&nbsp; Go to
+            Channels -&gt; Manage Software Channel -&gt; Create Channel.<br>
+            Enter the channel name, type, etc.<br>
+            <div align="center"><img alt="" src="virtualLabImages/012.JPG" height="339" width="799"><br>
+              <div align="left">Now go to Manage Repositories -&gt;
+                Create repository.&nbsp; Fill in appropriate information<br>Now go to Systems -&gt; Activation Keys -&gt; Create Key.&nbsp; Leave all the fields blank and select the base channel.<br><br>Now to create a Child Channel.&nbsp; Channel Name <b>mariadb.centos7</b> since this channel will have mariadb.&nbsp; Select parent channel.<br>Then go to Manage Repositories -&gt; Create repository<br><br>Go to Manage Software Channels -&gt; mariadb.centos7 -&gt; Repositories and click Update Repositories<br>Now to go Sync and click Sync Now.<br>
+                <br><br></div></div></div></div></div></div></body></html>

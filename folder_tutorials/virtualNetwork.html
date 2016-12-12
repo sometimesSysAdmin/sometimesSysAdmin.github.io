@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Create a virtual lab</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <h1> "The Sometimes SysAdmin Blog" </h1>
+    <!-- Navigation Bar --> <span style="text-align: center;">
+      <div class="navBar"> | <a href="../index.html"> Home</a> | <a
+          href="../about.html"> About me</a> | <a
+          href="../programs.html"> Programs</a> | <a
+          href="../tutorials.html"> Tutorials</a> | <a
+          href="../blog.html"> Blog Posts</a> | </div>
+    </span> <br>
+    <div align="center">
+      <h1><u>Create a Virtual Network</u></h1>
+      <h3>Part 1 : Setting up your pfSense router<br>
+      </h3>
+      <div align="left"><br>
+        I like to keep a small virtual lab on my laptop so I can play
+        around with it when time permits. For this tutorial you will
+        need:<br>
+        <ul>
+          <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a></li>
+          <li><a href="https://pfsense.org/download/">pfSense iso</a></li>
+          <li><a href="https://wiki.centos.org/Download">CentOS 7
+              Everything iso</a><br>
+          </li>
+          <li><a
+href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Metasploitable</a></li>
+          <li><a href="https://www.kali.org/downloads/">Kali Linux ova</a></li>
+        </ul>
+        <p>Part 1 will be covering setting up pfSense to use as a router
+          for your internal network.<br>
+          <a href="virtualNetwork2.html">Part 2</a> will cover
+          installing Kali and Metasploitable<br>
+          <a href="virtualNetwork3.html">Part 3</a> will cover
+          provisioning a PXE Boot Server<br>
+          Part 4 will cover setting up Snort and Wireshark to look at
+          your new network<br>
+        </p>
+        <ul>
+        </ul>
+        Start by installing VirtualBox if you don't have it
+        already.&nbsp; Click "New" to provision a new VM.&nbsp; Name it
+        something sensible (like pfSense - router) that identifies
+        it.&nbsp; The type is BSD and the version<br>
+        pfSense is based on is FreeBSD (64-bit).&nbsp; It doesn't need
+        much memory so give it only 256 MB.&nbsp; You can get away with
+        a small .vdi as well so give it 1 GB and click "Create".<br>
+        <br>
+        Select the VM and click "Settings".&nbsp; Go to the Network
+        settings.&nbsp; For Adapter 1, I changed it to use the Bridged
+        Network (this makes some set up options easier, like the default
+        gateway and DNS settings).&nbsp; Enable Adapter 2, and choose
+        Internal Network (change the name if you want but I left it as
+        the default "intnet").&nbsp; This is all the settings we need to
+        change to click "OK" then head to the top menu and click
+        "Start".<br>
+        <br>
+        Browse to you pfSense iso and select it.&nbsp; Let it autoboot
+        until you reach this screen.<br>
+        <div align="center"><img alt="Configuration Console Page"
+            src="virtualLabImages/001.JPG" height="368" width="717"><br>
+        </div>
+        These defaults should work so scroll down to "Accept these
+        Settings" and hit Enter.<br>
+        We will use the Quick/Easy Install for this tutorial so hit
+        Enter again.&nbsp; Then hit Enter again (This is a new virtual
+        HDD so we don't care that it's going to erase all data).<br>
+        <br>
+        During installation, you can choose to install a custom
+        kernel.&nbsp; While a pretty cool feature, it's not necessary
+        for us, so hit Enter to select "Standard Kernel".&nbsp; When
+        installation is finished it will let you know it needs to
+        reboot, so hit Enter again (which seems to be the majority of
+        the tutorial, trust me keep reading because the hard[er] stuff
+        is coming).<br>
+        <b><font color="#ff0000">Before it reboots </font></b><font
+          color="#ff0000"><font color="#000000">you need to click the
+            disk icon at the bottom of the VM's screen to unmount the
+            .iso.&nbsp; If you forget to do this then click the red X
+            and power off the VM, go to Settings -&gt; Storage -&gt;
+            Right-click on the .iso and remove it.&nbsp; The OS is
+            already installed on the virtual HDD but it is a higher
+            priority in the boot order so it will try to reinstall
+            pfSense if you do not do this.<br>
+            <br>
+            When you get to this screen you're ready to continue.<br>
+          </font></font>
+        <div align="center"><font color="#ff0000"><font color="#000000"><img
+                alt="Start Menu" src="virtualLabImages/002.JPG"
+                height="401" width="718"><br>
+            </font></font>
+          <div align="left">As you can see the WAN interface got the IP
+            address 192.168.1.41 from DHCP on my router.&nbsp; This
+            interface is what will allow your virtual network to access
+            the internet for things like updates.&nbsp; But the LAN has
+            not been automatically set up, so enter option 2 to
+            configure a static IP address of your virtual network's
+            gateway.&nbsp; Then select the number for the LAN
+            option.&nbsp; I used these options for my virtual network.<br>
+            <br>
+            <table border="1" cellpadding="2" cellspacing="2"
+              width="100%">
+              <tbody>
+                <tr>
+                  <td valign="top" width="50%">LAN IPv4 address<br>
+                  </td>
+                  <td valign="top" width="50%">192.168.2.1<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="50%">LAN IPv4 subnet bit count<br>
+                  </td>
+                  <td valign="top" width="50%">24<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="50%">LAN IPv4 upstream gateway
+                    address<br>
+                  </td>
+                  <td valign="top" width="50%">None<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="50%">LAN IPV6 address<br>
+                  </td>
+                  <td valign="top" width="50%">None<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="50%">Enable DHCP server on
+                    LAN?<br>
+                  </td>
+                  <td valign="top" width="50%">y<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="50%">IPv4 client address range<br>
+                  </td>
+                  <td valign="top" width="50%">192.168.2.31 -
+                    192.168.2.254<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="50%">Revert to HTTP as
+                    webConfigurator protocol?<br>
+                  </td>
+                  <td valign="top" width="50%">y<br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+          </div>
+        </div>
+        You can keep it running now and check out the menu if you
+        want.&nbsp; I prefer to shut it down with option 5 and restart
+        it headless.&nbsp; Then I'll start up a new VM with a web
+        browser to finish configuration.&nbsp; So I'll make a CentOS 7
+        VM and give it 768 MB and a 2 GB .vdi.<br>
+        <br>
+        When you have the VM up and running open up Firefox and browse
+        to http://192.168.2.1 (or whatever you set your IPv4 address
+        as).&nbsp; The username is <b>admin</b> and the password is <b>pfsense</b>
+        by default.&nbsp; You will want to change the password after the
+        set-up wizard.<br>
+        <div align="center"><img alt="pfSense Browser webConfiguration"
+            src="virtualLabImages/003.JPG" height="291" width="732"><br>
+        </div>
+        Click Next to start the wizard and on the next page.&nbsp; The
+        next screen is the General Settings, so here are my settings:<br>
+        <table border="1" cellpadding="2" cellspacing="2" width="100%">
+          <tbody>
+            <tr>
+              <td valign="top" width="50%">Hostname<br>
+              </td>
+              <td valign="top" width="50%">fw1<br>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" width="50%">Domain<br>
+              </td>
+              <td valign="top" width="50%">harvey.virtnet<br>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" width="50%">Primary DNS Server<br>
+              </td>
+              <td valign="top" width="50%">192.168.2.1 (The pfSense box)<br>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" width="50%">Secondary DNS Server<br>
+              </td>
+              <td valign="top" width="50%">192.168.1.1 (The gateway for
+                the bridged WAN)<br>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" width="50%">Override DNS<br>
+              </td>
+              <td valign="top" width="50%">No<br>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        The time server information was correct to I just kept the
+        defaults.&nbsp; Similarly, WAN is already configured correctly,
+        so we can skip the next page also.&nbsp; LAN is also correctly
+        configured, but if you want to make any changes to it now would
+        be the time.&nbsp; When done click Next.&nbsp; Set your new
+        admin password and reload the configuration.<br>
+        <br>
+        So now you're in the dashboard and everything looks good
+        right?&nbsp; But you open a new tab and go to google.com and get
+        nothing.&nbsp; So what is the next step?&nbsp; DNS.&nbsp; It's
+        almost always DNS.&nbsp; To confirm you can ping 8.8.8.8, but
+        not google.com.&nbsp; Go to Services -&gt; DNS Resolver and
+        unselect Enable DNS Resolver.&nbsp; Then go to Services -&gt;
+        DNS Forwarder.&nbsp; You can check by running an nslookup on
+        fw1.<br>
+        <br>
+        This is the end of part 1.&nbsp; Next part we will be getting
+        Kali and Metasploitable set up on your virtual network.<br>
+        <br>
+      </div>
+    </div>
+  </body>
+</html>
