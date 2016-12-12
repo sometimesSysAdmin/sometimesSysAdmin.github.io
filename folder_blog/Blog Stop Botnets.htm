@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="blog.css">
+    <title>Only You Can Prevent Botnets</title>
+  </head>
+  <body>
+    <span style="text-align: center;"></span>
+    <!-- Header -->
+    <h1> "The Sometimes SysAdmin Blog" </h1>
+    <!-- Navigation Bar --> <span style="text-align: center;">
+      <div class="navBar"> | <a href="/index.html"> Home</a> | <a
+          href="/about.html"> About me</a> | <a href="/tutorials.html">
+          Tutorials</a> | <a href="/programs.html"> Programs</a> | </div>
+    </span> <a href="../blog.html"><br>
+      &lt; Back to Blog Posts</a><br>
+    <div align="center">
+      <h2><u>Only You Can Prevent Botnets<br>
+        </u></h2>
+      <p><i>December 12, 2016<br>
+          Jamie Harvey<br>
+        </i></p>
+      <div align="left">
+        <div align="center"><img alt="Smoky the Bear" src="smokey.jpg"
+            height="355" width="246"><br>
+        </div>
+        Only you can prevent botnets!!&nbsp; Botnets have been the talk
+        of the industry lately.&nbsp; DDOSing their way left and right,
+        you have definitely heard of them by now.&nbsp; What are
+        botnets, why are they important, and how can they be stopped?<br>
+        <br>
+        A botnet is a collection of *computers* that is connected to the
+        internet, under the control of a person with malicious
+        intentions.&nbsp; The reason there are so many of these zombie
+        computers is due to the explosion of the internet of things
+        (IoT).&nbsp; Manufacturers have identified a demand that more
+        and more products be connected to the internet.&nbsp; The
+        manufacturers asked how to connect their device to the internet
+        and nobody stopped to ask the question of why it needed to be
+        connected in the first place.&nbsp; So now we live in the age
+        where your coffeemaker, fridge, microwave, TV, and many other
+        devices are connected to the internet.<br>
+        <br>
+        These devices rarely, if ever, receive security updates.&nbsp;
+        Sometimes they are created without any security concerns in the
+        first place.&nbsp; And other times, the software was created
+        with malicious software to begin with!!&nbsp; A number of new
+        IoT devices are made quickly and cheap straight from
+        China.&nbsp; When I was in the military I became wary of
+        equipment made by the lowest bidder (and that was lowest in the
+        US).&nbsp; Do we really want to trust things running on our
+        network made by 8 cent per hour labor?&nbsp; So the software
+        running on your microwave gets compromised and joins an army of
+        other compromised devices.&nbsp; Then like an orchestra, the
+        conductor begins and every device starts sending traffic to the
+        targeted webservers.&nbsp; This is what is known as a DDOS
+        attack.&nbsp; The webserver(s) become flooded with requests and
+        packets.&nbsp; It's like trying to drink water through a
+        firehose with packets dropping left and right.<br>
+        <br>
+        Most of these devices in your home connect through your
+        router.&nbsp; Yes, YOUR router is what is allowing these devices
+        to become part of botnets that cripple DNS servers and prevent
+        us good internet users from watching cat videos on our favorite
+        websites.&nbsp; As consumer connectivity and bandwidth improves,
+        these attacks grow stronger and stronger.&nbsp; The onerous
+        falls on the consumer, as most ISPs tend to pass the buck.&nbsp;
+        Luckily, consumer grade routers have become pretty advanced.<br>
+        <br>
+        Chances are you either have a firewall or a router that allows
+        you to create firewall rules.&nbsp; The most secure option is of
+        course not connecting these devices to a network.&nbsp; My
+        parents recently got a smart TV that could connect to a network
+        for some simple applications.&nbsp; None of these applications
+        would ever be used, so I asked them if they really wanted their
+        new TV connected to the network.&nbsp; They of course wanted it
+        connected anyways.&nbsp; So the next more secure option was to
+        add the device, but create firewall rules to block all traffic
+        to and from the device.&nbsp; It showed up as connected,
+        wouldn't become a botnet, and they were none the wiser.&nbsp;
+        Sometimes, blocking all traffic will break a service on the
+        device.&nbsp; Whether this service is critical or not is your
+        call, and you'll need to use your networking skills to deduce
+        what port/services are required for the service to work (hint:
+        if the time stops working allow ntp).&nbsp; Open up these
+        ports/services and nothing more!<br>
+        <br>
+        The next time a DDOS attack leaves your favorite website
+        unreachable, make sure that you aren't part of the problem.<br>
+      </div>
+      <p align="left"><br>
+      </p>
+      <div align="left"><a
+href="Blog%20%20Why%20Aren%27t%20You%20Using%20Password%20Managers%20.html">&lt;
+          Previous Post</a> </div>
+      <div align="right"> Next Post &gt;<br>
+      </div>
+      <p align="left"> </p>
+    </div>
+    <!-- Donate Button -->
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+      target="_top" data-ajax="false"> <input name="cmd"
+        value="_s-xclick" type="hidden"> <input name="hosted_button_id"
+        value="C6H37RANCUX42" type="hidden"> <input
+        src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+        name="submit" alt="PayPal - The safer, easier way to pay
+        online!" border="0" type="image"> <img alt=""
+        src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
+        border="0" height="1" width="1"> </form>
+    <br>
+  </body>
+</html>
