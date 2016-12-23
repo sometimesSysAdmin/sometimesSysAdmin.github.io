@@ -31,8 +31,8 @@ footer	{	text-size:		x-small;
 .navBar a:link {	color:		black;
 			background-color:	#17d611;}
 
-.navBar a:visited {	background-color:	#999999;
-			color:		black;}
+.navBar a:visited {	background-color:	#17d611;
+			color:		blue;}
 
 .navBar a:focus {	color:		red;
 			background-color:	#999999;}
