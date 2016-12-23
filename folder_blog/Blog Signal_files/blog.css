@@ -4,8 +4,6 @@ body 	{ 	margin:			0;
 		scrollbar-arrow-color:	#006600;
 		scrollbar-track-color:	#cccccc;
 		padding:		20px 20px 20px 20px;}
-		
-
 
 h1 	{	margin:			0;
 		background-color: 	#17d611;
@@ -19,13 +17,6 @@ h1 	{	margin:			0;
 		border-left:		2px solid black;
 		color:		  	black;
 		padding:	  	30px 30px 30px 30px;}
-		
-h2	{	margin:			0;
-		font-size:		xx-large;
-		font-style:		bold;
-		text-align:		center;
-		
-		}
 
 footer	{	text-size:		x-small;
 		text-align:		right;
@@ -47,7 +38,7 @@ footer	{	text-size:		x-small;
 			background-color:	#999999;}
 
 .navBar a:hover {	color:		white;
-			background-color:	#068206;
+			background-color:	red;
 			border:		2px outset #000000;}
 
 .navBar a:active {	color:		#000000;
