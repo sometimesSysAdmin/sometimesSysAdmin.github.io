@@ -8,7 +8,7 @@ body 	{ 	margin:			0;
 
 
 h1 	{	margin:			0;
-		background-color: 	#999999;
+		background-color: 	#17d611;
 		font-size: 	  	xx-large;
 		font-style:	  	bold;
 		outline-color: 	  	red;
@@ -17,8 +17,15 @@ h1 	{	margin:			0;
 		border-bottom:		2px solid black;
 		border-right:		2px solid black;
 		border-left:		2px solid black;
-		color:		  	red;
+		color:		  	black;
 		padding:	  	30px 30px 30px 30px;}
+		
+h2	{	margin:			0;
+		font-size:		xx-large;
+		font-style:		bold;
+		text-align:		center;
+		
+		}
 
 footer	{	text-size:		x-small;
 		text-align:		right;
@@ -31,15 +38,15 @@ footer	{	text-size:		x-small;
 		padding:	 	20px 20px 20px 20px;}
 
 .navBar a:link {	color:		black;
-			background-color:	#999999;}
+			background-color:	#17d611;}
 
-.navBar a:visited {	background-color:	#999999;
-			color:		black;}
+.navBar a:visited {	background-color:	#17d611;
+			color:		blue;}
 
 .navBar a:focus {	color:		red;
 			background-color:	#999999;}
 
-.navBar a:hover {	color:		#999999;
+.navBar a:hover {	color:		white;
 			background-color:	red;
 			border:		2px outset #000000;}
 
