@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89416231-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <link rel="stylesheet" type="text/css" href="tutorial.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Windows AD Part 2</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <h1> "The Sometimes SysAdmin Blog" </h1>
+    <!-- Navigation Bar --> <span style="text-align: center;">
+      <div class="navBar"> | <a href="../index.html"> Home</a> | <a
+          href="../about.html"> About me</a> | <a
+          href="../programs.html"> Programs</a> | <a
+          href="../tutorials.html"> Tutorials</a> | <a
+          href="../blog.html"> Blog Posts</a> | </div>
+    </span> <br>
+    <div align="center">
+      <h2><u>Windows Active Directory<br>
+        </u></h2>
+      <h3>Part 2 : Joining Linux clients to AD<br>
+      </h3>
+      <div align="left"><br>
+        CentOS 7 has made joining a Linux client to AD incredibly
+        easy.&nbsp; Get root access.&nbsp; Install realmd and
+        PackageKit.&nbsp; Then type the following:<br>
+        <code>&nbsp;&nbsp;&nbsp; nmcli c modify enp0s3 ipv4.dns [ip
+          address of AD server]<br>
+          &nbsp;&nbsp;&nbsp; systemctl restart network<br>
+          &nbsp;&nbsp;&nbsp; realm discover harvey.virtnet<br>
+        </code>This should give you information about your domain and
+        required packages.&nbsp; If you get any errors then most likely
+        DNS hasn't been configured properly and you'll need to
+        troubleshoot that before continuing.<br>
+        <code>&nbsp;&nbsp;&nbsp; realm join harvey.virtnet<br>
+        </code>Next you'll need to edit /etc/sssd/sssd.conf and edit
+        line 16 to False to not use FQDN so you can omit the domain name
+        for AD users.&nbsp; Use systemctl to restart sssd.<br>
+        If you don't receive any errors, you can go into your AD server
+        and under Tools -&gt; Active Directory Users and Computers -&gt;
+        Computers you should see the hostname of the machine you
+        added.&nbsp; Log in under an AD account or type <code>id
+          Administrator </code>if you don't believe me.<br>
+        <br>
+        <br>
+      </div>
+    </div>
+    <!-- Donate Button -->
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+      target="_top" data-ajax="false"> <input name="cmd"
+        value="_s-xclick" type="hidden"> <input name="hosted_button_id"
+        value="C6H37RANCUX42" type="hidden"> <input
+        src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+        name="submit" alt="PayPal - The safer, easier way to pay
+        online!" border="0" type="image"> <img alt=""
+        src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
+        border="0" height="1" width="1"> </form>
+    <br>
+    <!-- Footer -->
+    <footer> Page created by Jamie Harvey </footer>
+  </body>
+</html>
