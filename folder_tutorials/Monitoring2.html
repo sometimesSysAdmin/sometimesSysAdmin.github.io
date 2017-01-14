@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89416231-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <link rel="stylesheet" type="text/css" href="tutorial.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Monitoring with Nagios</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <h1> "The Sometimes SysAdmin Blog" </h1>
+    <!-- Navigation Bar --> <span style="text-align: center;">
+      <div class="navBar"> | <a href="../index.html"> Home</a> | <a
+          href="../about.html"> About me</a> | <a
+          href="../programs.html"> Programs</a> | <a
+          href="../tutorials.html"> Tutorials</a> | <a
+          href="../blog.html"> Blog Posts</a> | </div>
+    </span> <br>
+    <div align="center">
+      <h2><u>System Monitoring<br>
+        </u></h2>
+      <h3>Adding Windows Server 2012 to Nagios<br>
+      </h3>
+      <div align="left"><br>
+        For this to work, we'll need the NSClient++ Agent installed on
+        our Windows server.&nbsp; Download the installer.<br>
+        <br>
+        Run the installer and enter the ipaddress of your Nagios server,
+        in my case by checking fw1 it's 192.168.2.45.&nbsp; Enter the
+        default ports, and click finish when done.<br>
+        <br>
+        SSH into your nagios server and into
+        /usr/local/nagios/etc/nagios.cfg and uncomment the line to allow
+        nagios to parse all configurations in the servers folder.&nbsp;
+        Copy the windows.cfg file from objects into the servers folder
+        and name it the hostname of the Windows Server.&nbsp; Inside the
+        ${hostname}.cfg file, change the ip address in define_host to
+        the correct address, and change the hostname throughout the
+        config by using search and replace <code>:g/winserver/s//new_hostname/g</code>
+        in vi.&nbsp; <br>
+        <br>
+        At the bottom of this config file are the services that Nagios
+        will be tracking.&nbsp; You can (and should) write new ones.<br>
+        <br>
+        When you're finished, run <code>systemctl restart nagios</code>
+        and also enable it so it starts on boot.<br>
+        <br>
+        Finally you might need to adjust the firewall with <code>firewall-cmd
+          --permanent --add-port=5666/tcp</code> on both the host and
+        agents.&nbsp; Remember to reload the firewall when you're done!<br>
+        <br>
+        <br>
+        <br>
+        Bonus: To install the Nagios Agent on a CentOS or RHEL server
+        follow the document <a
+href="https://assets.nagios.com/downloads/nagiosxi/docs/Installing_The_XI_Linux_Agent.pdf">here</a><br>
+        <br>
+        <br>
+      </div>
+    </div>
+    <!-- Donate Button -->
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+      target="_top" data-ajax="false"> <input name="cmd"
+        value="_s-xclick" type="hidden"> <input name="hosted_button_id"
+        value="C6H37RANCUX42" type="hidden"> <input
+        src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+        name="submit" alt="PayPal - The safer, easier way to pay
+        online!" border="0" type="image"> <img alt=""
+        src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
+        border="0" height="1" width="1"> </form>
+    <br>
+    <!-- Footer -->
+    <footer> Page created by Jamie Harvey </footer>
+  </body>
+</html>
