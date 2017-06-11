@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89416231-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <link rel="stylesheet" type="text/css" href="tutorial.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>iMac Student Lab Setup</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <h1> "The Sometimes SysAdmin Blog" </h1>
+    <!-- Navigation Bar --> <span style="text-align: center;">
+      <div class="navBar"> | <a href="../index.html"> Home</a> | <a
+          href="../about.html"> About me</a> | <a
+          href="../programs.html"> Programs</a> | <a
+          href="../tutorials.html"> Tutorials</a> | <a
+          href="../blog.html"> Blog Posts</a> | </div>
+    </span> <br>
+    <div align="center">
+      <h2><u>Setting up an iMac Lab<br>
+        </u></h2>
+      <h3>This article is going to document my setup of 14 brand new
+        iMacs in a university student computer lab<br>
+      </h3>
+      <div align="left"><br>
+        <a
+href="file:///C:/Users/harve/Documents/GitHub/sometimesSysAdmin.github.io/tutorials.html">&lt;
+
+
+
+
+          Back to Tutorials</a><br>
+        <br>
+        For this project, we wanted to upgrade our Apple computing lab
+        but we had some specific requirements from faculty, students,
+        and our own IT standards.&nbsp; I only did this for one iMac
+        that I was going to use as the base image.&nbsp; I will then use
+        Clonezilla to clone the hard drive and restore it on the other
+        iMacs.&nbsp; This exact hard drive copy method would prevent me
+        from having to configure multiple computers, and would ensure
+        that each computer was configured exactly like the others for
+        the entire lab.&nbsp; Restoring hard drives ended up taking 10
+        minutes per machine, making this solution the most cost
+        effective method.<br>
+        <br>
+        <u>Requirements</u>:<br>
+        <ul>
+          <li>Local administrator access with a strong password<br>
+          </li>
+          <li>Any changes the user makes to the local system must be
+            reset upon logging off</li>
+          <li>Users must be able to run a VM of Ubuntu 14.04 LTS and/or
+            16.04 LTS</li>
+          <li>Users must log on with their account on our department's
+            Active Directory</li>
+          <li>The users must be able to access their remote filesystem
+            directories</li>
+        </ul>
+        The first requirement was the easiest.&nbsp; This was done on
+        initial setup.<br>
+        <br>
+        To restrict any local changes we used Faronics Deep Freeze for
+        Mac.&nbsp; But in order to use this software we had to ensure
+        that we purchased iMac's that did not have the new Fusion
+        drives.&nbsp; The reason for this is due to an Apple feature
+        known as Core Storage.&nbsp; In order for Deep Freeze for Mac to
+        work correctly, Core Storage must be turned off.&nbsp;
+        Unfortunately this is not possible for Fusion drives because
+        they rely on Core Storage to work.&nbsp; This also requires that
+        the drive not have File Vault enabled, as it too relies on Core
+        Storage.&nbsp; To turn Core Storage off open the Terminal
+        application and type<br>
+        <code><br>
+          diskutil cs list</code><br>
+        <br>
+        This will list the Volumes mounted on the Mac.&nbsp; If Core
+        Storage is turned on the hard drive it will be listed.&nbsp;
+        Under the entry for Revertible you can see if Core Storage is
+        able to be turned off.&nbsp; If it says "Yes" or "Yes (unlock
+        and decryption required)" then you can turn Core Storage off by
+        typing in the Terminal<br>
+        <br>
+        <code>diskutil cs revert /<br>
+          <br>
+        </code>If your drive does not support disabling Core Storage
+        then all hope is not lost but this tutorial will not be covering
+        the rest of the required steps.&nbsp; This is why we were
+        careful in selection of iMacs (we have already learned the hard
+        way!)&nbsp; After this was finished I installed Deep Freeze for
+        Mac.&nbsp; This program also allows for remote management using
+        the Apple Remote Desktop application available from the App
+        Store.&nbsp; We looked at the app and closed the App Store once
+        we saw the price, but if your budget can allow for it then it
+        can be very useful.&nbsp; Configuration of Deep Freeze is
+        documented extremely clearly by Faronics, and so I will refer
+        you <a
+href="http://www.faronics.com/document-library/?product=doc_product_category_deep&amp;qcAC=1">here</a>
+        for setting it up.<br>
+        <br>
+        <br>
+        <a
+href="file:///C:/Users/harve/Documents/GitHub/sometimesSysAdmin.github.io/tutorials.html">&lt;
+
+
+
+
+          Back to Tutorials</a><br>
+        <br>
+        <br>
+      </div>
+    </div>
+    <!-- Donate Button -->
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+      target="_top" data-ajax="false"> <input name="cmd"
+        value="_s-xclick" type="hidden"> <input name="hosted_button_id"
+        value="C6H37RANCUX42" type="hidden"> <input
+        src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+        name="submit" alt="PayPal - The safer, easier way to pay
+        online!" type="image" border="0"> <img alt=""
+        src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
+        width="1" height="1" border="0"> </form>
+    <br>
+    <!-- Footer -->
+    <footer> Page created by Jamie Harvey </footer>
+  </body>
+</html>
