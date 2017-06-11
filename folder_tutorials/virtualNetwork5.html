@@ -11,42 +11,35 @@
   ga('send', 'pageview');
 
 </script>
+    <link rel="stylesheet" type="text/css" href="tutorial.css">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="blog.css">
-    <title>Title</title>
+    <title>Create a virtual lab</title>
   </head>
   <body>
-    <span style="text-align: center;"></span>
     <!-- Header -->
     <h1> "The Sometimes SysAdmin Blog" </h1>
     <!-- Navigation Bar --> <span style="text-align: center;">
-      <div class="navBar"> | <a href="/index.html"> Home</a> | <a
-          href="/about.html"> About me</a> | <a href="/tutorials.html">
-          Tutorials</a> | <a href="/programs.html"> Programs</a> | </div>
-    </span> <a href="../blog.html"><br>
-      &lt; Back to Blog Posts</a><br>
+      <div class="navBar"> | <a href="../index.html"> Home</a> | <a
+          href="../about.html"> About me</a> | <a
+          href="../programs.html"> Programs</a> | <a
+          href="../tutorials.html"> Tutorials</a> | <a
+          href="../blog.html"> Blog Posts</a> | </div>
+    </span> <br>
     <div align="center">
-      <h2><u>[Title]</u></h2>
-      <p><i>Date<br>
-          Jamie Harvey<br>
-        </i></p>
-      <div align="left">[Content Here]<br>
+      <h2><u>Create a Virtual Network<br>
+        </u></h2>
+      <h3>Bonus : Local mail server<br>
+      </h3>
+      <div align="left"><br>
+        Make a CentOS 7 server and install postfix from the centosplus
+        repo.&nbsp; Exclude it from base and updates with <code>exclude=postfix</code>
+        in /etc/yum.repos.d/CentOS-Base.repo.<br>
+        Then yum install dovecot mariadb-server dovecot-mysql.<br>
+        <br>
+        <br>
+        <br>
+        <br>
       </div>
-      <p align="left"><br>
-      </p>
-      <table border="0" cellpadding="2" cellspacing="2" width="100%">
-        <tbody>
-          <tr>
-            <td valign="top">&lt;
-              Previous
-              Post<br>
-            </td>
-            <td align="right" valign="top">Next Post &gt;<br>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <p align="left"> </p>
     </div>
     <!-- Donate Button -->
     <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
